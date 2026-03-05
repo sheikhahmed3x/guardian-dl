@@ -12,6 +12,10 @@ api_key_header = APIKeyHeader(name="X-API-KEY")
 app = FastAPI(title="Guardian-DL Commercial API")
 
 # Load Brain
+@app.get("/")
+async def root():
+    return {"message": "Guardian-DL API is online", "docs": "/docs"}
+
 model = GuardianDL()
 if os.path.exists("guardian_v1.pth"):
     model.load_state_dict(torch.load("guardian_v1.pth"))
